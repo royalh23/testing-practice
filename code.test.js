@@ -1,4 +1,10 @@
-import { capitalize, reverseString, calculator, caesarCipher } from './code';
+import {
+  capitalize,
+  reverseString,
+  calculator,
+  caesarCipher,
+  analyzeArray,
+} from './code';
 
 describe('capitalize', () => {
   test('Returns string with first char capitalized', () => {
@@ -81,5 +87,34 @@ describe('caesarCipher', () => {
 
   test('Ignores punctuation', () => {
     expect(caesarCipher('h!el? l<o>', 5)).toEqual('m!jq? q<t>');
+  });
+});
+
+describe('analyzeArray', () => {
+  test('Returns an object from an array', () => {
+    expect(analyzeArray([1, 8, 3, 4, 2, 6])).toEqual({
+      average: 4,
+      min: 1,
+      max: 8,
+      length: 6,
+    });
+  });
+
+  test('Returns an object from a different array', () => {
+    expect(analyzeArray([3, 8, 5])).toEqual({
+      average: 5,
+      min: 3,
+      max: 8,
+      length: 3,
+    });
+  });
+
+  test('Works with negative numbers', () => {
+    expect(analyzeArray([-4, -5, 6, -12])).toEqual({
+      average: -4,
+      min: -12,
+      max: 6,
+      length: 4,
+    });
   });
 });
