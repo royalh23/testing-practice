@@ -15,4 +15,23 @@ const calculator = (() => {
   return { add, subtract, multiply, divide };
 })();
 
-export { capitalize, reverseString, calculator };
+function caesarCipher(str, shift) {
+  const alph = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  return str
+    .split('')
+    .map((letter) => {
+      const index = (alph.indexOf(letter.toLowerCase()) + shift) % 26;
+      if (
+        ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_']
+          .concat(['+', '=', '{', '[', '}', ']', '|', ';', ':', '"', "'", '<'])
+          .concat([',', '>', '.', '?', '/', ' '])
+          .includes(letter)
+      )
+        return letter;
+      if (letter === letter.toUpperCase()) return alph[index].toUpperCase();
+      return alph[index];
+    })
+    .join('');
+}
+
+export { capitalize, reverseString, calculator, caesarCipher };

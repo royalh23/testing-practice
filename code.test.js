@@ -1,4 +1,4 @@
-import { capitalize, reverseString, calculator } from './code';
+import { capitalize, reverseString, calculator, caesarCipher } from './code';
 
 describe('capitalize', () => {
   test('Returns string with first char capitalized', () => {
@@ -55,5 +55,31 @@ describe('calculator', () => {
 
   test('Divides large numbers', () => {
     expect(calculator.divide(1000, 250)).toEqual(4);
+  });
+});
+
+describe('caesarCipher', () => {
+  test('Encrypts with a shift factor of 1', () => {
+    expect(caesarCipher('hello', 1)).toEqual('ifmmp');
+  });
+
+  test('Encrypts with a shift factor of 3', () => {
+    expect(caesarCipher('hello', 3)).toEqual('khoor');
+  });
+
+  test('Wraps from "z" to "a"', () => {
+    expect(caesarCipher('xyz', 1)).toEqual('yza');
+  });
+
+  test('Wraps from "z" to "a" with a greater shift factor', () => {
+    expect(caesarCipher('zxcvufik', 69)).toEqual('qotmlwzb');
+  });
+
+  test('Keeps the same case for each character', () => {
+    expect(caesarCipher('hElLo', 5)).toEqual('mJqQt');
+  });
+
+  test('Ignores punctuation', () => {
+    expect(caesarCipher('h!el? l<o>', 5)).toEqual('m!jq? q<t>');
   });
 });
